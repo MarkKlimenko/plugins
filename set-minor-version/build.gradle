@@ -1,5 +1,5 @@
 group 'com.markklim.plugins'
-version '0.1'
+version '0.8'
 
 buildscript {
     repositories {
@@ -27,13 +27,13 @@ dependencies {
 pluginBundle {
     website = 'http://www.markklim.com/'
     vcsUrl = 'https://github.com/MarkKlimenko/plugins'
-    description = 'Add minor version'
+    description = 'Set minor version to project version in properties file'
     tags = ['version', 'increment']
 
     plugins {
-        addMinorVersion {
-            id = 'com.markklim.plugins.amv'
-            displayName = 'Add minor version plugin'
+        setMinorVersion {
+            id = 'com.markklim.plugins.smv'
+            displayName = 'Set minor version plugin'
         }
     }
 }

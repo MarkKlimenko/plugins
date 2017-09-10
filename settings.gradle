@@ -1,4 +1,4 @@
 rootProject.name = 'plugins'
 
-include 'add-minor-version'
+include 'set-minor-version'
 
