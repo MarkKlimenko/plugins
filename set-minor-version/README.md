@@ -1,4 +1,4 @@
-    ## Set minor version plugin
+## Set minor version plugin
 - designed for setting minor version from CI managers or manual launching from gradle command
 - set version to gradle.properties file of root project
 - update version number, commit and push changes in properties file to git 
