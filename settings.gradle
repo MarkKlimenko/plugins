@@ -1,4 +1,5 @@
 rootProject.name = 'plugins'
 
 include 'set-minor-version'
+include 'release-to-docker'
 
