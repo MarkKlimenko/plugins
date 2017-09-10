@@ -1,12 +1,11 @@
-##Gradle plugins
+## Gradle plugins
 
 #### Set minor version plugin
-_set-minor-version_
-
-[Documentation](set-minor-version/README.md)
+[set-minor-version](set-minor-version/README.md)
 
 
-
+#### Useful commands
+<pre>
 gradlew publishPlugins
-
 gradlew :release-to-docker:publishPlugins
+</pre>
