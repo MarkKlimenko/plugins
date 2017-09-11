@@ -8,11 +8,11 @@ class SetMinorVersion implements Plugin<Project> {
         project.extensions.create('setMinorVersion', SetMinorVersionExtension)
         project.task('setMinorVersion') {
             doLast {
-                def minorVersion = project.setMinorVersion.smvMinorVersion
-                def ciBranchName = project.setMinorVersion.smvCiBranchName
-                def ciCredentials = project.setMinorVersion.smvCiCredentials
-                def ciProjectPath = project.setMinorVersion.smvCiProjectPath
-                def ciCommitMessage = project.setMinorVersion.smvCiCommitMessage
+                def minorVersion = project.setMinorVersion.mVersion
+                def ciBranchName = project.setMinorVersion.branchName
+                def ciCredentials = project.setMinorVersion.credentials
+                def ciProjectPath = project.setMinorVersion.projectPath
+                def ciCommitMessage = project.setMinorVersion.commitMessage
 
                 ["git", "checkout", ciBranchName].execute().text
 
@@ -38,9 +38,9 @@ class SetMinorVersion implements Plugin<Project> {
 }
 
 class SetMinorVersionExtension {
-    String smvMinorVersion
-    String smvCiBranchName
-    String smvCiCredentials
-    String smvCiProjectPath
-    String smvCiCommitMessage = 'Set minor version'
+    String mVersion
+    String branchName
+    String credentials
+    String projectPath
+    String commitMessage = 'Set minor version'
 }

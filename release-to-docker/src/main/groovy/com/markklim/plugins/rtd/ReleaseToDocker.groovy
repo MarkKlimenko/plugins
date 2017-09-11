@@ -8,31 +8,36 @@ class ReleaseToDocker implements Plugin<Project> {
         project.extensions.create('releaseToDocker', ReleaseToDockerExtension)
         project.task('releaseToDocker') {
             doLast {
-                def registryUrl = project.releaseToDocker.rtdRegistryUrl
-                def imageName = project.releaseToDocker.rtdImageName
-                def dockerFileLocation = project.releaseToDocker.rtdDockerFileLocation
-                def warFileName = project.releaseToDocker.rtdWarFileName
-                def projectVersion = project.releaseToDocker.rtdProjectVersion
-                def dockerUsername = project.releaseToDocker.rtdDockerUsername
-                def dockerPassword = project.releaseToDocker.rtdDockerPassword
-                def rmiAfterPush = project.releaseToDocker.rtdRmiAfterPush
+                def dockerHub = project.releaseToDocker.dockerHub
+                def registryUrl = project.releaseToDocker.registryUrl
+                def imageName = project.releaseToDocker.imageName
+                def dockerFileLocation = project.releaseToDocker.dockerFileLocation
+                def warFileName = project.releaseToDocker.imageFileName
+                def projectVersion = project.releaseToDocker.imageVersion
+                def dockerUsername = project.releaseToDocker.username
+                def dockerPassword = project.releaseToDocker.password
+                def rmiAfterPush = project.releaseToDocker.rmiAfterPush
 
-                copy {
+                project.copy {
                     from "${dockerFileLocation}/Dockerfile"
                     from "build/libs/${warFileName}"
                     into 'build/docker'
                 }
-                exec {
+                project.exec {
                     workingDir 'build/docker'
                     commandLine 'docker', 'build', '-t', "${registryUrl}/${imageName}:${getMajorVersion(projectVersion)}", '.'
                 }
-                exec { commandLine 'docker', 'login', registryUrl, "-u=${dockerUsername}", "-p=${dockerPassword}" }
-                exec { commandLine 'docker', 'push', "${registryUrl}/${imageName}:${getMajorVersion(projectVersion)}" }
 
-                if(rmiAfterPush) {
-                    exec { commandLine 'docker', 'rmi', "${registryUrl}/${imageName}:${getMajorVersion(projectVersion)}" }
+                if(dockerHub) {
+                    project.exec { commandLine 'docker', 'login', "-u=${dockerUsername}", "-p=${dockerPassword}" }
+                } else {
+                    project.exec { commandLine 'docker', 'login', registryUrl, "-u=${dockerUsername}", "-p=${dockerPassword}" }
                 }
 
+                project.exec { commandLine 'docker', 'push', "${registryUrl}/${imageName}:${getMajorVersion(projectVersion)}" }
+                if(rmiAfterPush) {
+                    project.exec { commandLine 'docker', 'rmi', "${registryUrl}/${imageName}:${getMajorVersion(projectVersion)}" }
+                }
             }
         }
     }
@@ -42,12 +47,13 @@ class ReleaseToDocker implements Plugin<Project> {
 }
 
 class ReleaseToDockerExtension {
-    String rtdRegistryUrl
-    String rtdImageName
-    String rtdDockerFileLocation
-    String rtdWarFileName
-    String rtdProjectVersion
-    String rtdDockerUsername
-    String rtdDockerPassword
-    Boolean rtdRmiAfterPush = false
+    Boolean dockerHub = false
+    String registryUrl
+    String imageName
+    String dockerFileLocation
+    String imageFileName
+    String imageVersion
+    String username
+    String password
+    Boolean rmiAfterPush = false
 }
