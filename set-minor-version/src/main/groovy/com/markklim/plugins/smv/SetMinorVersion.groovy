@@ -12,6 +12,7 @@ class SetMinorVersion implements Plugin<Project> {
                 def ciBranchName = project.setMinorVersion.smvCiBranchName
                 def ciCredentials = project.setMinorVersion.smvCiCredentials
                 def ciProjectPath = project.setMinorVersion.smvCiProjectPath
+                def ciCommitMessage = project.setMinorVersion.smvCiCommitMessage
 
                 ["git", "checkout", ciBranchName].execute().text
 
@@ -29,7 +30,7 @@ class SetMinorVersion implements Plugin<Project> {
                 }
 
                 ["git", "add", "gradle.properties"].execute().text
-                ["git", "commit", "-m","Set minor version [skip ci]"].execute().text
+                ["git", "commit", "-m","${ciCommitMessage} [skip ci]"].execute().text
                 ["git", "push", "http://${ciCredentials}@${ciProjectPath}", "HEAD:" + ciBranchName].execute().text
             }
         }
@@ -41,4 +42,5 @@ class SetMinorVersionExtension {
     String smvCiBranchName
     String smvCiCredentials
     String smvCiProjectPath
+    String smvCiCommitMessage = 'Set minor version'
 }

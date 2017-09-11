@@ -17,10 +17,13 @@ Version number
 - projectVersion = 0.1.11 -> projectVersion = 0.1.22
 
 #### Required variables:
-- minorVersion - minor version from CI manager or manual command invocation _(1234, 12, 014)_
-- ciBranchName - targeted branch name _(master, versions/0.1, branches/0.1/Test_branch)_
-- ciCredentials - credentials for pushing into git branch _(user:password)_
-- ciProjectPath - project path in git _(192.168.1.38/backoffice/ui-provider-service.git/)_
+- smvMinorVersion - minor version from CI manager or manual command invocation _(1234, 12, 014)_
+- smvCiBranchName - targeted branch name _(master, versions/0.1, branches/0.1/Test_branch)_
+- smvCiCredentials - credentials for pushing into git branch _(user:password)_
+- smvCiProjectPath - project path in git _(192.168.1.38/backoffice/ui-provider-service.git/)_
+
+#### Optional variables:
+- smvCiCommitMessage - commit message "${smvCiCommitMessage} [skip ci]" or default 'Set minor version [skip ci]'
 
 #### Usage:
 **build.gradle - install plugin**
@@ -42,10 +45,11 @@ apply plugin: 'com.markklim.plugins.smv'
 **build.gradle - settings**
 <pre>
 setMinorVersion {
-    setSmvMinorVersion minorVersion
+    setSmvMinorVersion minorVersion 
     setSmvCiBranchName ciBranchName
     setSmvCiCredentials ciCredentials
     setSmvCiProjectPath ciProjectPath
+    setSmvCiCommitMessage 'Message'
 }
 
 OR
@@ -55,6 +59,7 @@ setMinorVersion {
     smvCiBranchName = ciBranchName
     smvCiCredentials = ciCredentials
     smvCiProjectPath = ciProjectPath
+    smvCiCommitMessage = 'Message'
 }
 </pre>
 

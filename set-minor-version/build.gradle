@@ -1,5 +1,5 @@
 group 'com.markklim.plugins'
-version '0.8'
+version '0.9'
 
 buildscript {
     repositories {
