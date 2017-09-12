@@ -5,25 +5,25 @@
 
 #### Requirements to gradle.properties file
 
-**Example (if -PminorVersion=22):**
+_Example (if -PminorVersion=22)_
 
-Spaces before and after '=' mark
+Spaces before and after '=' mark:
 - projectVersion = 0.1 -> projectVersion = 0.1.22
 - projectVersion=0.1 -> projectVersion=0.1.22
 - projectVersion= 0.1 -> projectVersion= 0.1.22
 
-Version number
+Version number:
 - projectVersion = 0.1 -> projectVersion = 0.1.22
 - projectVersion = 0.1.11 -> projectVersion = 0.1.22
 
 #### Required variables:
-- smvMinorVersion - minor version from CI manager or manual command invocation _(1234, 12, 014)_
-- smvCiBranchName - targeted branch name _(master, versions/0.1, branches/0.1/Test_branch)_
-- smvCiCredentials - credentials for pushing into git branch _(user:password)_
-- smvCiProjectPath - project path in git _(192.168.1.38/backoffice/ui-provider-service.git/)_
+- mVersion - minor version from CI manager or manual command invocation _(1234, 12, 014)_
+- branchName - targeted branch name _(master, versions/0.1, branches/0.1/Test_branch)_
+- credentials - credentials for pushing into git branch _(user:password)_
+- projectPath - project path in git _(192.168.1.38/backoffice/ui-provider-service.git/)_
 
 #### Optional variables:
-- smvCiCommitMessage - commit message "${smvCiCommitMessage} [skip ci]" or default 'Set minor version [skip ci]'
+- commitMessage - commit message "${commitMessage} [skip ci]" or default 'Set minor version [skip ci]'
 
 #### Usage:
 **build.gradle - install plugin**
@@ -45,21 +45,11 @@ apply plugin: 'com.markklim.plugins.smv'
 **build.gradle - settings**
 <pre>
 setMinorVersion {
-    setSmvMinorVersion minorVersion 
-    setSmvCiBranchName ciBranchName
-    setSmvCiCredentials ciCredentials
-    setSmvCiProjectPath ciProjectPath
-    setSmvCiCommitMessage 'Message'
-}
-
-OR
-
-setMinorVersion {
-    smvMinorVersion = minorVersion
-    smvCiBranchName = ciBranchName
-    smvCiCredentials = ciCredentials
-    smvCiProjectPath = ciProjectPath
-    smvCiCommitMessage = 'Message'
+    mVersion = minorVersion
+    branchName = ciBranchName
+    credentials = ciCredentials
+    projectPath = ciProjectPath
+    commitMessage = 'Message'
 }
 </pre>
 

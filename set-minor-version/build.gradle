@@ -25,7 +25,7 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'http://www.markklim.com/'
+    website = 'https://github.com/MarkKlimenko/plugins'
     vcsUrl = 'https://github.com/MarkKlimenko/plugins'
     description = 'Set minor version to project version in properties file'
     tags = ['version', 'increment']

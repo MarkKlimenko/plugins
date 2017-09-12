@@ -25,7 +25,7 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'http://www.markklim.com/'
+    website = 'https://github.com/MarkKlimenko/plugins'
     vcsUrl = 'https://github.com/MarkKlimenko/plugins'
     description = 'Release project to docker registry'
     tags = ['docker', 'registry', 'release']
