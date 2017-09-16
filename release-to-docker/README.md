@@ -53,6 +53,7 @@ gradlew setMinorVersion -PminorVersion=$TRAVIS_BUILD_NUMBER -PciBranchName=$TRAV
 </pre>
 
 **Quick start**
+
  1.Add plugin to build.gradle file
 
  2.Add Docker file:
