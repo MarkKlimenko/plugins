@@ -1,0 +1,1 @@
+gradlew :migrator-for-cassandra:publishPlugins

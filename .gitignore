@@ -1,5 +1,6 @@
 
-/add-minor-version/build/
 /.idea/
 /build/
 /.gradle/
+/set-minor-version/build/
+/release-to-docker/build/
