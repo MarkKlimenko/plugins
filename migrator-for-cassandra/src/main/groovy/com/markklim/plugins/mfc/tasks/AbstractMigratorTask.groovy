@@ -12,6 +12,7 @@ abstract class AbstractMigratorTask extends DefaultTask {
 
     public String keyspace
     public String script
+    public Map placeholders
 
     public MigratorExtension extension
 
@@ -44,6 +45,7 @@ abstract class AbstractMigratorTask extends DefaultTask {
         putIfSet(parameters, 'port', port, extension.port)
         putIfSet(parameters, 'keyspace', keyspace, extension.keyspace)
         putIfSet(parameters, 'script', script, extension.script)
+        putIfSet(parameters, 'placeholders', placeholders, extension.placeholders)
 
         parameters
     }

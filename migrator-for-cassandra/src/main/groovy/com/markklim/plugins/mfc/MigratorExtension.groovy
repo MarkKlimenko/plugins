@@ -10,4 +10,5 @@ class MigratorExtension {
     public String password
     public String keyspace
     public String script
+    public Map placeholders
 }

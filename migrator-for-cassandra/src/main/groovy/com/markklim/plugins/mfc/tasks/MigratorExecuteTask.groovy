@@ -29,7 +29,7 @@ class MigratorExecuteTask extends AbstractMigratorTask {
 
     static void executeFile(Map parameters, File source) {
         getScriptFromFile(source)
-                .with { implementPlaceholders(it) }
+                .with { implementPlaceholders(parameters, it) }
                 .with { scriptToList(it) }
                 .each { executeLine(parameters, it) }
         println "Script executed: file ${source.getName()}"

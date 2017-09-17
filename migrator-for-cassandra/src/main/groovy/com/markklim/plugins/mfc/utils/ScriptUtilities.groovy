@@ -10,8 +10,10 @@ class ScriptUtilities {
         script.replaceAll(/\/\/.*/, '')
     }
 
-    static String implementPlaceholders(String script) {
-        script.replace("%schema%", 'tda')
+    static String implementPlaceholders(Map parameters, String script) {
+        parameters.placeholders
+                .each { script = script.replace("%${it.key}%", it.value as String) }
+        script
     }
 
     static List scriptToList(String script) {
