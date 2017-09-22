@@ -4,3 +4,5 @@
 /.gradle/
 /set-minor-version/build/
 /release-to-docker/build/
+/migrator-for-cassandra/build/
+/migrator-for-cassandra/out/
