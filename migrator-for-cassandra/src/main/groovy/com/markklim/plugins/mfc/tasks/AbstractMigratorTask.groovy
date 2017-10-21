@@ -5,8 +5,8 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 abstract class AbstractMigratorTask extends DefaultTask {
-    public String host = '127.0.0.1'
-    public String port = '9042'
+    public String host
+    public String port
     public String user
     public String password
 
@@ -43,6 +43,8 @@ abstract class AbstractMigratorTask extends DefaultTask {
         Map <String,Object> parameters = [:]
         putIfSet(parameters, 'host', host, extension.host)
         putIfSet(parameters, 'port', port, extension.port)
+        putIfSet(parameters, 'user', user, extension.user)
+        putIfSet(parameters, 'password', password, extension.password)
         putIfSet(parameters, 'keyspace', keyspace, extension.keyspace)
         putIfSet(parameters, 'script', script, extension.script)
         putIfSet(parameters, 'placeholders', placeholders, extension.placeholders)
