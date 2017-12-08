@@ -16,9 +16,9 @@ class MigratorExecuteTask extends AbstractMigratorTask {
         try {
             File source = new File(parameters.script as String)
             if (source.isDirectory()) {
-                source.eachFile(FileType.FILES) {
-                    executeFile(parameters, it)
-                }
+                source.listFiles()
+                        .sort { it.name }
+                        .each { executeFile(parameters, it) }
             } else {
                 executeFile(parameters, source)
             }
@@ -28,11 +28,12 @@ class MigratorExecuteTask extends AbstractMigratorTask {
     }
 
     static void executeFile(Map parameters, File source) {
+        print "Script executed: file ${source.getName()}"
         getScriptFromFile(source)
                 .with { implementPlaceholders(parameters, it) }
                 .with { scriptToList(it) }
                 .each { executeLine(parameters, it) }
-        println "Script executed: file ${source.getName()}"
+        println ' OK'
     }
 
     static void executeLine(Map parameters, String scriptLine) {
